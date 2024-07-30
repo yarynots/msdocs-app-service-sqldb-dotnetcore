@@ -6,13 +6,13 @@ var builder = WebApplication.CreateBuilder(args);
 if(builder.Environment.IsDevelopment())
 {
     builder.Services.AddDbContext<MyDatabaseContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("MyDbConnection")));
+        options.UseMySQL(builder.Configuration.GetConnectionString("MyDbConnection")));
     builder.Services.AddDistributedMemoryCache();
 }
  else
  {
      builder.Services.AddDbContext<MyDatabaseContext>(options =>
-         options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_MYSQL_CONNECTIONSTRING")));
+         options.UseMySQL(builder.Configuration.GetConnectionString("AZURE_MYSQL_CONNECTIONSTRING")));
      builder.Services.AddStackExchangeRedisCache(options =>
      {
      options.Configuration = builder.Configuration["AZURE_REDIS_CONNECTIONSTRING"];
